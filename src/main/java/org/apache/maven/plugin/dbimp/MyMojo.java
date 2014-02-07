@@ -28,7 +28,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 /**
  * MyMojo Description. @Mojo( name = "sayhi" ) is the minimal required
  * annotation.
- * 
+ * @author Mickaël Patron 
  * @since <since-text>
  */
 @Mojo(name = "sayhi", defaultPhase = LifecyclePhase.PROCESS_SOURCES)

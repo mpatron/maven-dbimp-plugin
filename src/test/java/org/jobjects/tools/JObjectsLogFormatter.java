@@ -10,6 +10,10 @@ import java.util.logging.LogRecord;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
+/**
+ * @author Mickaël Patron
+ *
+ */
 public class JObjectsLogFormatter extends Formatter {
 	private static final DateFormat format = new SimpleDateFormat("h:mm:ss");
 	

@@ -35,4 +35,5 @@
 			</plugin>
 		</plugins>
 	</build>
+	<description>Author Mickaël Patron</description>
 </project>
