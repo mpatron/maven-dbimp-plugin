@@ -13,6 +13,7 @@ import org.apache.maven.plugin.testing.AbstractMojoTestCase;
 public class MyMojoTest extends AbstractMojoTestCase {
   private static Logger LOGGER = Logger.getLogger(MyMojoTest.class.getName());
 
+
   protected static void setUpBeforeClass() throws Exception {
     LOGGER.info("MyMojoTest.setUpBeforeClass()");
   }
@@ -41,6 +42,7 @@ public class MyMojoTest extends AbstractMojoTestCase {
       Mojo myMojo = lookupMojo("sayhi", pom);
       assertNotNull(myMojo);
       myMojo.execute();
+      
     } catch (Exception e) {
       e.printStackTrace();
     }
