@@ -17,6 +17,7 @@ package org.apache.maven.plugin.dbimp;
  */
 
 import java.io.File;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.maven.plugin.logging.Log;
@@ -24,6 +25,7 @@ import org.apache.maven.plugin.logging.SystemStreamLog;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.jobjects.dbimp.Importation;
 
 /**
  * MyMojo Description. @Mojo( name = "sayhi" ) is the minimal required
@@ -34,14 +36,6 @@ import org.apache.maven.plugins.annotations.Parameter;
 @Mojo(name = "sayhi", defaultPhase = LifecyclePhase.PROCESS_SOURCES)
 public class MyMojo implements org.apache.maven.plugin.Mojo {
   private Logger LOGGER = Logger.getLogger(getClass().getName());
-
-  @Parameter(required = true)
-  protected File outputDirectory;
-
-  public void execute() {
-    getLog().info("Hello, world ! => outputDirectory=" + outputDirectory);
-    LOGGER.info("Hello, world.");
-  }
 
   private Log log = null;
 
@@ -55,4 +49,56 @@ public class MyMojo implements org.apache.maven.plugin.Mojo {
   public void setLog(Log log) {
     this.log = log;
   }
+
+
+  @Parameter(required = true)
+  protected String password;
+  
+  @Parameter(required = true)
+  protected String username;
+  
+  @Parameter(required = true)
+  protected String url;
+  
+  @Parameter(required = true)
+  protected String fileTxt;
+
+  @Parameter(required = true)
+  protected String fileXml;
+
+  @Parameter(required = false)
+  protected String report;
+
+  @Parameter(required = false, defaultValue="ISO-8859-1")
+  protected String encodage;
+  
+  public void execute() {
+	  getLog().info("Hello, world !");
+	  
+	  StringBuffer sb = new StringBuffer ();
+	  sb.append("username="+username+System.lineSeparator());
+	  sb.append("password="+password+System.lineSeparator());
+	  sb.append("url="+url+System.lineSeparator());
+	  sb.append("fileTxt="+fileTxt+System.lineSeparator());
+	  sb.append("fileXml"+fileXml+System.lineSeparator());
+	  sb.append("report="+report+System.lineSeparator());
+	  sb.append("encodage="+encodage+System.lineSeparator());
+    
+	  getLog().info(sb.toString());
+	  try {
+		  String[] args = new String[]{"-U", username, 
+				  						"-P", password,
+				  						"-u", url,
+				  						"-f", fileTxt,
+				  						"-x", fileXml,
+				  						"-r", report}; 
+		  Importation.main(args);
+	  } catch (Exception e) {
+		  LOGGER.log(Level.SEVERE, "Error in Importation starting.", e);
+	  }
+	  
+	  
+    LOGGER.info("Hello, world.");
+  }
+
 }
