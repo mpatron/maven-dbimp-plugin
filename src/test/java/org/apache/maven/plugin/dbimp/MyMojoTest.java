@@ -6,7 +6,9 @@ import java.util.logging.Logger;
 
 import org.apache.maven.plugin.Mojo;
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
-import org.testng.annotations.Test;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
  * * @author Mickaël Patron
@@ -15,10 +17,12 @@ import org.testng.annotations.Test;
 public class MyMojoTest extends AbstractMojoTestCase {
   private static Logger LOGGER = Logger.getLogger(MyMojoTest.class.getName());
 
+  @BeforeClass
   protected static void setUpBeforeClass() throws Exception {
     LOGGER.info("MyMojoTest.setUpBeforeClass()");
   }
 
+  @AfterClass
   protected static void tearDownAfterClass() throws Exception {
     LOGGER.info("MyMojoTest.tearDownAfterClass()");
   }
@@ -45,7 +49,7 @@ public class MyMojoTest extends AbstractMojoTestCase {
       Mojo myMojo = lookupMojo("sayhi", pom);
       assertNotNull(myMojo);
       myMojo.execute();
-
+      assertTrue(true);
     } catch (Exception e) {
       LOGGER.severe("!!! AbstractMojoTestCase et JUnit ont quel lien ? !!! Héritage !!! ");
       LOGGER.log(Level.SEVERE, "Erreur dans l'execution du plugin durant sa phase de test.", e);

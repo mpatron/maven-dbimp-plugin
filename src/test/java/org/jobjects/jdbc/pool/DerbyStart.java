@@ -10,9 +10,6 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
 public class DerbyStart {
 
 	private static Logger LOGGER = Logger.getLogger(DerbyStart.class.getName());
@@ -20,7 +17,7 @@ public class DerbyStart {
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@BeforeClass
+	//@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		try {
 			String driver = "org.apache.derby.jdbc.EmbeddedDriver";
@@ -89,7 +86,7 @@ public class DerbyStart {
 		}
 	}
 
-	@Test
+	///@Test
 	public void testStart() {
 		LOGGER.log(Level.INFO, "Derby Stating");
 	}

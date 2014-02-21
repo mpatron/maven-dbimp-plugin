@@ -4,9 +4,6 @@ import java.sql.DriverManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.Test;
-
 public class DerbyStop {
 
 	private static Logger LOGGER = Logger.getLogger(DerbyStop.class.getName());
@@ -14,7 +11,7 @@ public class DerbyStop {
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@AfterClass
+	//@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		try {
 			LOGGER.info("Extinction de Derby");
@@ -30,7 +27,7 @@ public class DerbyStop {
 		}
 	}
 
-	@Test
+	//@Test
 	public void testStop() {
 		LOGGER.log(Level.INFO, "Derby Stop");
 	}
