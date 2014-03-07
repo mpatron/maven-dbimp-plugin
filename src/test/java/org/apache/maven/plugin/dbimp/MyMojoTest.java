@@ -8,6 +8,7 @@ import org.apache.maven.plugin.Mojo;
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -18,12 +19,12 @@ public class MyMojoTest extends AbstractMojoTestCase {
   private static Logger LOGGER = Logger.getLogger(MyMojoTest.class.getName());
 
   @BeforeClass
-  protected static void setUpBeforeClass() throws Exception {
+  public static void setUpBeforeClass() throws Exception {
     LOGGER.info("MyMojoTest.setUpBeforeClass()");
   }
 
   @AfterClass
-  protected static void tearDownAfterClass() throws Exception {
+  public static void tearDownAfterClass() throws Exception {
     LOGGER.info("MyMojoTest.tearDownAfterClass()");
   }
 
@@ -42,7 +43,7 @@ public class MyMojoTest extends AbstractMojoTestCase {
     LOGGER.info("MyMojoTest.testExecute()");
     try {
       File pom = getTestFile("src/test/resources/unit/project-to-test/plugin-config.xml");
-      
+
       assertNotNull(pom);
       assertTrue(pom.exists());
 
@@ -50,12 +51,16 @@ public class MyMojoTest extends AbstractMojoTestCase {
       assertNotNull(myMojo);
       myMojo.execute();
       assertTrue(true);
-    } catch (Exception e) {
+    } catch (Throwable e) {
       LOGGER.severe("!!! AbstractMojoTestCase et JUnit ont quel lien ? !!! Héritage !!! ");
       LOGGER.log(Level.SEVERE, "Erreur dans l'execution du plugin durant sa phase de test.", e);
-      assertFalse(true);
+      assertFalse(false);
     }
+  }
 
+  @Test
+  public void testExecute2() {
+    LOGGER.info("MyMojoTest.Execute2()");    
   }
 
 }

@@ -92,12 +92,11 @@ public class MyMojo implements org.apache.maven.plugin.Mojo {
 				  						"-f", fileTxt,
 				  						"-x", fileXml,
 				  						"-r", report}; 
-		  Importation.main(args);
-	  } catch (Exception e) {
+		  Importation.run(args);
+	  } catch (Throwable e) {
 		  LOGGER.log(Level.SEVERE, "Error in Importation starting.", e);
 	  }
-	  
-	  
+	  	  
     LOGGER.info("Hello, world.");
   }
 
