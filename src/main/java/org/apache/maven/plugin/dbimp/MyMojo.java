@@ -72,6 +72,9 @@ public class MyMojo implements org.apache.maven.plugin.Mojo {
   @Parameter(required = false, defaultValue="ISO-8859-1")
   protected String encodage;
   
+  @Parameter(required = true)
+  protected String schemaName;
+  
   public void execute() {
 	  getLog().info("Hello, world !");
 	  
@@ -80,10 +83,12 @@ public class MyMojo implements org.apache.maven.plugin.Mojo {
 	  sb.append("password="+password+System.lineSeparator());
 	  sb.append("url="+url+System.lineSeparator());
 	  sb.append("fileTxt="+fileTxt+System.lineSeparator());
-	  sb.append("fileXml"+fileXml+System.lineSeparator());
+	  sb.append("fileXml="+fileXml+System.lineSeparator());
 	  sb.append("report="+report+System.lineSeparator());
 	  sb.append("encodage="+encodage+System.lineSeparator());
-    
+	  sb.append("schemaName="+schemaName+System.lineSeparator());
+	  
+	  
 	  getLog().info(sb.toString());
 	  try {
 		  String[] args = new String[]{"-U", username, 
@@ -91,7 +96,8 @@ public class MyMojo implements org.apache.maven.plugin.Mojo {
 				  						"-u", url,
 				  						"-f", fileTxt,
 				  						"-x", fileXml,
-				  						"-r", report}; 
+				  						"-r", report,
+				  						"--schema", schemaName}; 
 		  Importation.run(args);
 	  } catch (Throwable e) {
 		  LOGGER.log(Level.SEVERE, "Error in Importation starting.", e);

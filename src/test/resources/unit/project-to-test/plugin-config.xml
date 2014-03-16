@@ -10,7 +10,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -26,16 +26,18 @@
 						<goals>
 							<goal>sayhi</goal>
 						</goals>
-					</execution>
+					</execution>					
 				</executions>
 
 				<configuration>
-					<username>user</username>
-					<password>password</password>
-					<url>jdbc:derby:mybase</url>
-					<fileTxt>monfichier.txt</fileTxt>
-					<fileXml>monfichier.xml</fileXml>
-					<report>target/test-harness/project-to-test</report>
+					<username>derby</username>
+					<password>derby</password>
+					<!-- <url>jdbc:derby:memory:MyDerbyDB</url>  -->
+					<url>jdbc:derby://localhost:1527/db</url>
+					<fileTxt>${basedir}/target/test-classes/userfilename.asc</fileTxt>
+					<fileXml>${basedir}/target/test-classes/userfilename.xml</fileXml>
+					<report>${basedir}/target</report>
+					<schemaName>MYDERBYDB</schemaName>
 				</configuration>
 			</plugin>
 		</plugins>

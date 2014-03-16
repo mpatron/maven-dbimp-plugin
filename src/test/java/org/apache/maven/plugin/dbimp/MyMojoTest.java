@@ -6,15 +6,21 @@ import java.util.logging.Logger;
 
 import org.apache.maven.plugin.Mojo;
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
+import org.jobjects.derby.DerbySingleton;
+import org.jobjects.jdbc.pool.DerbyStart;
+import org.jobjects.tools.Order;
+import org.jobjects.tools.OrderedRunner;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * * @author Mickaël Patron
  * 
  */
+//@RunWith(OrderedRunner.class)
 public class MyMojoTest extends AbstractMojoTestCase {
   private static Logger LOGGER = Logger.getLogger(MyMojoTest.class.getName());
 
@@ -39,9 +45,25 @@ public class MyMojoTest extends AbstractMojoTestCase {
   }
 
   @Test
-  public void testExecute() {
-    LOGGER.info("MyMojoTest.testExecute()");
+  @Order(order=1)
+  public void testAAAStartDatabase() {
+    LOGGER.info("MyMojoTest.testAAAStartDatabase()");
     try {
+      //DerbyStart.setUpBeforeClass();
+    } catch (Throwable e) {
+      LOGGER.log(Level.SEVERE, "erreur dans le chargement de la base derby.", e);
+      assertFalse(false);
+    }
+  }
+  
+  @Test
+  @Order(order=2)
+  public void testAABExecute() {
+    LOGGER.info("MyMojoTest.testAABExecute()");
+    try {
+      DerbySingleton.getInstance().dbStart();
+      DerbySingleton.getInstance().createSchema();
+      
       File pom = getTestFile("src/test/resources/unit/project-to-test/plugin-config.xml");
 
       assertNotNull(pom);
@@ -59,8 +81,14 @@ public class MyMojoTest extends AbstractMojoTestCase {
   }
 
   @Test
-  public void testExecute2() {
-    LOGGER.info("MyMojoTest.Execute2()");    
+  @Order(order=3)
+  public void testAACExecute2() {
+    LOGGER.info("MyMojoTest.testAACExecute2()");    
   }
 
+  @Test
+  @Order(order=4)
+  public void testAADStopDatabase() {
+    LOGGER.info("MyMojoTest.testAADStopDatabase()");
+  }
 }

@@ -21,7 +21,7 @@
 		<dependency>
 			<groupId>org.jobjects</groupId>
 			<artifactId>dbimp</artifactId>
-			<version>1.0.1</version>
+			<version>1.0.2</version>
 		</dependency>
 		<!-- 
 		<dependency>
@@ -45,6 +45,14 @@
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derbyclient</artifactId>
+			<version>[10.9.1.0,)</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+		
 		
 		<dependency>
 			<groupId>junit</groupId>
@@ -148,8 +156,41 @@
 							<value>${basedir}/target/derby.log</value>
 						</property>
 					</systemProperties>
+					<runOrder>alphabetical</runOrder>
 				</configuration>
 			</plugin>
+			<plugin>
+				<artifactId>derby-maven-plugin</artifactId>
+				<groupId>org.carlspring.maven</groupId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>start</id>
+						<phase>generate-test-sources</phase>
+						<goals>
+							<goal>start</goal>
+							<!--
+							<goal>run</goal> 
+							 -->
+						</goals>
+						<configuration>
+							<derby.fail.if.already.running>true</derby.fail.if.already.running>
+						</configuration>
+					</execution>
+					<execution>
+						<id>stop</id>
+						<!-- prepare-package -->
+						<phase>test</phase>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+						<configuration>
+							<derby.fail.if.already.running>true</derby.fail.if.already.running>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
 		</plugins>
 
 	</build>

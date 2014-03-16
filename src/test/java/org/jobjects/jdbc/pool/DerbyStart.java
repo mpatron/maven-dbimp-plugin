@@ -79,8 +79,8 @@ public class DerbyStart {
 			while (tables.next()) {
 				tableNames.add(tables.getString("TABLE_NAME").toLowerCase());
 			}
-
 			conn.close();
+      LOGGER.log(Level.INFO, "Derby Started");
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "Erreur non prévu : ", e);
 		}
