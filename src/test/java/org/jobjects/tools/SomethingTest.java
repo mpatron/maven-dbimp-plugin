@@ -2,7 +2,6 @@ package org.jobjects.tools;
 
 import java.util.logging.Logger;
 
-import org.apache.maven.plugin.dbimp.MyMojoTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 /*

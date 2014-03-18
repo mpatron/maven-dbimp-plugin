@@ -16,7 +16,6 @@ package org.apache.maven.plugin.dbimp;
  * limitations under the License.
  */
 
-import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

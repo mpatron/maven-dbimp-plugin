@@ -7,14 +7,10 @@ import java.util.logging.Logger;
 import org.apache.maven.plugin.Mojo;
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
 import org.jobjects.derby.DerbySingleton;
-import org.jobjects.jdbc.pool.DerbyStart;
 import org.jobjects.tools.Order;
-import org.jobjects.tools.OrderedRunner;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 /**
  * * @author Mickaël Patron
